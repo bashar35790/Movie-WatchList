@@ -7,7 +7,8 @@ import MovieList from "./MovieList";
 
 const MovieWatch = () => {
     const [movies, setMovies]=useState([]);
-
+    const [filter, setFilter] = useState("all");
+   
 
     function getMovi({title, ott}){
             const newMovie={
@@ -28,7 +29,7 @@ const MovieWatch = () => {
   }
 
   function toggleWatched(id){
-        setMovies(movies.map((movi)=>movi.id===id?{...movi, watched:!movi.watched}:movi))
+    setMovies(movies.map((movi)=>movi.id===id?{...movi, watched:!movi.watched}:movi))
   }
 
   function deleteMovi(id){
@@ -36,13 +37,22 @@ const MovieWatch = () => {
     setMovies(movies.filter(movi=> movi.id !== id));
   }
 
+
+
+
+
     return (
+
         <div className="w-[80%] h-full bg-gray-700 m-auto">
             <Heading/>
             <MovieForm getMovi={getMovi}/>
-            <Filter/>
-            <MovieList 
 
+            <Filter 
+             setFilter={setFilter}
+            />
+
+            <MovieList 
+            filter={filter}
             movies={movies}
             rateMovie={rateMovie} 
             toggleWatched={toggleWatched} 

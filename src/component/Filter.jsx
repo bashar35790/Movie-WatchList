@@ -1,14 +1,30 @@
+import PropTypes from "prop-types";
 
-
-const Filter = () => {
+export default function Filter({ setFilter }) {
     return (
-        <div className="flex justify-center gap-3 mt-3">
-            <button className="text-white bg-gray-600 p-2 rounded-sm">All</button>
-            <button className="bg-green-700 p-2 rounded-sm">Watched</button>
-            <button className="bg-blue-500 rounded-sm ">Unwatched</button>
-
+        <div className="flex flex-col md:flex-row justify-center gap-3 mb-4 mt-4">
+            <button
+                onClick={() => setFilter("all")}
+                className="px-3 py-2 bg-blue-700 hover:bg-gray-600 text-white rounded"
+            >
+                All
+            </button>
+            <button
+                onClick={() => setFilter("watched")}
+                className="px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded"
+            >
+                Watched
+            </button>
+            <button
+                onClick={() => setFilter("unwatched")}
+                className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded"
+            >
+                Unwatched
+            </button>
         </div>
     );
-};
+}
 
-export default Filter;
+Filter.propTypes = {
+    setFilter: PropTypes.func.isRequired,
+};
