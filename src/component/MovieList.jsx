@@ -1,8 +1,13 @@
-import MovieItem from "./MovieItem";
-import PropTypes from "prop-types";
 
-const MovieList = ({movies, rateMovie, toggleWatched, deleteMovi, filter}) => {
-    const isWatched=(movie) =>{
+import { useContext } from "react";
+import MovieItem from "./MovieItem";
+import UsersContext from "./context/UserContext";
+
+const MovieList = () => {
+    
+    const {movies, filter} = useContext(UsersContext);
+    
+    const btnFilltering=(movie) =>{
         if (filter == "watched")
             return movie.watched == true;
         if (filter == "unwatched")
@@ -10,6 +15,7 @@ const MovieList = ({movies, rateMovie, toggleWatched, deleteMovi, filter}) => {
         else
             return true;
     }
+    
 
     return (
         <div className="mt-4 p-4">
@@ -18,13 +24,9 @@ const MovieList = ({movies, rateMovie, toggleWatched, deleteMovi, filter}) => {
         ):(
         <ul className="space-y-3">
             {
-              movies.filter((movie)=> isWatched(movie)).map((movi)=>(<MovieItem 
-                key={movi.id}
-                rateMovie={rateMovie} 
-                toggleWatched={toggleWatched} 
-                deleteMovi={deleteMovi}
-                movi={movi}
-                
+              movies.filter((movie)=> btnFilltering(movie)).map((movie)=>(<MovieItem 
+                key={movie.id}  
+                movie={movie}              
                 />))
             }
         </ul>
@@ -35,21 +37,6 @@ const MovieList = ({movies, rateMovie, toggleWatched, deleteMovi, filter}) => {
     );
 };
 
-MovieList.propTypes ={
-    movies:PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            title:PropTypes.string.isRequired,
-            ott:PropTypes.string.isRequired,
-            watched: PropTypes.bool.isRequired,
-            rating:PropTypes.number.isRequired,
-        })
-    ).isRequired,
-    rateMovie:PropTypes.func.isRequired,
-    toggleWatched:PropTypes.func.isRequired,
-    deleteMovi:PropTypes.func.isRequired,
-    filter: PropTypes.func.isRequired
 
-};
 
 export default MovieList;
