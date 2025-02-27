@@ -1,6 +1,12 @@
-import PropTypes from "prop-types";
 
-export default function Filter({ setFilter }) {
+import { useContext } from "react";
+import UsersContext from "./context/UserContext";
+
+
+export default function Filter() {
+
+    const { setFilter } = useContext(UsersContext);
+    
     return (
         <div className="flex flex-col md:flex-row justify-center gap-3 mb-4 mt-4">
             <button
@@ -25,6 +31,3 @@ export default function Filter({ setFilter }) {
     );
 }
 
-Filter.propTypes = {
-    setFilter: PropTypes.func.isRequired,
-};

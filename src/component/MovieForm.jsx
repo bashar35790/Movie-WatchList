@@ -1,7 +1,9 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
+import { useContext, useState } from "react";
+import UsersContext from "./context/UserContext";
 
-const MovieForm = ({getMovi}) => {
+const MovieForm = () => {
+    const { getMovi } = useContext(UsersContext);
+
     const [movieData, setMovieData] = useState({
         title:"",
         ott:"",
@@ -59,8 +61,6 @@ const MovieForm = ({getMovi}) => {
     );
 };
 
-MovieForm.propTypes = {
-    getMovi: PropTypes.func.isRequired,
-};
+
 
 export default MovieForm;
